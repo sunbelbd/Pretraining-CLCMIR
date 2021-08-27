@@ -31,9 +31,12 @@ Special thanks to the following Pytorch code that help us develop our work.
 * [VL-BERT](https://github.com/jackroos/VL-BERT)
 * [SCAN](https://github.com/kuanghuei/SCAN) 
 
+## TODO
+* Distributed version
+* Scripts to automatically download, process and extract visual features. 
 
 ## Reference
-If you find the work useful, please consider citing the it as following:
+If you find the work useful, please consider citing it as following:
 ```
 @inproceedings{DBLP:conf/naacl/FeiYL21,
   author    = {Hongliang Fei and Tan Yu and Ping Li},
