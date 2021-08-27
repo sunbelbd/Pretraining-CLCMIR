@@ -1,30 +1,50 @@
-# vision-bert-CCL
-## Prepare dataset and models
+# Cross-lingual Cross-modal Pretraining for Multimodal Retrieval
+This repository contains PaddlePaddle code that supports experiments in our NAACL 2021 paper: Cross-lingual Cross-modal Pretraining for Multimodal Retrieval. 
+Note: Pytorch version is available upon request.
 
-### Pretrain Dataset:
-conceptual caption dataset, you can download the precomputed features through this link
+## Usage
+Data and pretrained model paths are changable in configuraiton files in paddle_version/cfgs. 
+### Pretraining Dataset:
+We follow the steps [here](https://github.com/jackroos/VL-BERT/tree/master/data/conceptual-captions) to download and extract visual features.
 
-then unzip your downloaded file, obtain the fold cc, and move it to the fold ./dataset
+* [English conceptual caption dataset](https://github.com/igorbrigadir/DownloadConceptualCaptions)
+* [English SBU captions](http://www.cs.virginia.edu/~vicente/sbucaptions/SBUCaptionedPhotoDataset.tar.gz)
 
 ### Finetune Dataset:
-MS coco dataset, you can download the precomputed features through this link
+* [MS coco](https://cocodataset.org/#download), we use train2014, val2014 and test2015.
+* [Multi30K](https://github.com/multi30k/dataset), we use train, val and test2016. 
 
-then unzip your downloaded file, obtain the fold coco, and move it to the fold ./dataset
+The visual features are extracted in the same way as pretraining data.  
 
-### BERT Model
-you can download the pretrained bert model through this link
+### Pretraining
+```
+bash scripts/pretrain.sh
+```
+### Fine-tuning
+```
+bash scripts/finetune.sh YOUR_PRETRAINED_MODEL_FILE YOUR_FINETUNE_CONFIG_FILE  YOUR_CHECKPOINT_DIR
+```
+where YOUR_FINETUNE_CONFIG_FILE is a configuration file (e.g., ./paddle_version/cfgs/xlretcoco/base_ret_ja_16x16G_fp32.yaml).
 
-then move your downloaded .bin file to ./bert fold
-
-### Pretrained Vision-Bert Model
-
-## Run Scripts
-
+## Acknowledgements
+Special thanks to the following Pytorch code that help us develop our work.
+* [VL-BERT](https://github.com/jackroos/VL-BERT)
+* [SCAN](https://github.com/kuanghuei/SCAN) 
 
 
-
-
-
-## To do
-
-# Ploy Vision-Text Encoder
+## Reference
+If you find the work useful, please consider citing the it as following:
+```
+@inproceedings{DBLP:conf/naacl/FeiYL21,
+  author    = {Hongliang Fei and Tan Yu and Ping Li},
+  title     = {Cross-lingual Cross-modal Pretraining for Multimodal Retrieval},
+  booktitle = {Proceedings of the 2021 Conference of the North American Chapter of
+               the Association for Computational Linguistics: Human Language Technologies,
+               {NAACL-HLT} 2021, Online, June 6-11, 2021},
+  pages     = {3644--3650},
+  publisher = {Association for Computational Linguistics},
+  year      = {2021},
+  url       = {https://doi.org/10.18653/v1/2021.naacl-main.285},
+  doi       = {10.18653/v1/2021.naacl-main.285}
+}
+```
